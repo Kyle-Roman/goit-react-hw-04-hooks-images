@@ -25,7 +25,7 @@ export default function App() {
       .then((images) => {        
         if (images.total !== 0) {
           setStatus('resolved');
-            setPics((prevImages) => [...prevImages, ...images.hits]);
+            setPics((prevPics) => [...prevPics, ...images.hits]);
             setButton(true);
            } else {
             setStatus('rejected')
@@ -37,7 +37,7 @@ export default function App() {
           setStatus('rejected');
       })
       .finally(handlePageScroll);
-}, [searchRequest, page, pics]);
+}, [searchRequest, page]);
   
   const handlePageScroll = () => {
     window.scrollTo({
@@ -47,12 +47,12 @@ export default function App() {
   };
 
   const handleBtnClick = () => {
-    setPage(page => page + 1)
+    setPage((page) => page + 1);
   };
 
   const handleSubmit = (searchRequest, page) => {
     setSearchRequest(searchRequest);
-    setPage(page);
+    setPage(1);
     setPics([]);
   }
  
@@ -62,7 +62,7 @@ export default function App() {
      {status === 'idle' && <div className={s.starter}>Let`s find some pictures!</div>}
      {status === 'pending' && <LoadingView />}
      {status === 'rejected' && <ErrorView message={error} />}
-     {status === 'resolved' && <ImageGallery images={pics} />}
+     <ImageGallery searchRequest={searchRequest} images={pics} />
      {button && <Button onClick={handleBtnClick} />}
     </div>
   );
