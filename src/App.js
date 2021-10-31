@@ -6,7 +6,7 @@ import ErrorView from "./Components/ErrorView/ErrorView";
 import LoadingView from "./Components/Loader/Loader";
 import Button from "./Components/Button/Button";
 
-import s from './App.css';
+import s from './App.module.css';
 
 export default function App() {
   const [searchRequest, setSearchRequest] = useState('');
